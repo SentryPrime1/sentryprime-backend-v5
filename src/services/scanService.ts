@@ -1,10 +1,21 @@
+// src/services/scanService.ts
 
 import prisma from '../lib/prisma';
 
-export function createScan(data: { userId: string; url: string; result: any }) {
-  return prisma.scan.create({ data });
+type CreateScanInput = {
+  userId: string;
+  url: string;
+  status: string;
+  issues: any;
+};
+
+export async function createScan(data: CreateScanInput) {
+  return await prisma.scanResult.create({ data });
 }
 
-export function getScansByUser(userId: string) {
-  return prisma.scan.findMany({ where: { userId } });
+export async function getScansByUser(userId: string) {
+  return await prisma.scanResult.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+  });
 }

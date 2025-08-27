@@ -1,8 +1,7 @@
+import express from 'express';
 
-import { Router } from 'express';
+export const healthRoutes = express.Router();
 
-export const healthRouter = Router();
-
-healthRouter.get('/', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
+healthRoutes.get('/', (req, res) => {
+  res.json({ message: '✅ API is healthy' });
 });

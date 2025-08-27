@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ScanResult {
+  id        String   @id @default(uuid())
+  userId    String
+  url       String
+  status    String   @default("pending")
+  issues    Json     @default("[]")
+  createdAt DateTime @default(now())
+}
